@@ -10,18 +10,23 @@ export const Population = () => {
   const ref = useRef();
 
   useEffect(() => {
-    // TODO
+    fetch(populationUrl)
+      .then((res) => res.json())
+      .then((json) => setData(json.data));
   }, []);
 
   const handleChangeCountry = () => {
-    // TODO
+    const value = ref.current.value;
+    const populationnnn = data.find((el) => el.code === value);
+
+    setPopulation(populationnnn.populationCounts);
   }
 
   return (
     <div>
       <select ref={ref} className={classes.select} onChange={handleChangeCountry} defaultValue="">
-      { data.map((d) => {
-        return <option value={ d.code }>{ d.country }</option>
+      { data.map((d, index) => {
+        return <option value={ d.code } key={index}>{ d.country }</option>
       }) }
       </select>
       <Graph population={ population } />

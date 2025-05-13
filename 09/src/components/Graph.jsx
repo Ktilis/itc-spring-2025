@@ -9,6 +9,18 @@ export const Graph = ({ population }) => {
   return (
     <BarChart
       height={600}
+      dataset={population}
+      xAxis={[{
+        dataKey:'year', 
+        tickPlacement:'middle', 
+        tickLabelPlacement:'middle',
+        valueFormatter: String,
+      }]}
+      series={[{
+        dataKey:'value', 
+        tickPlacement:'middle', 
+        tickLabelPlacement:'middle'
+      }]}
     />
   )
 }
