@@ -20,10 +20,10 @@ export const Board = () => {
   return (
     <div className={classes.board}>
       {
-        range().map((row) => {
+        range().map((row, rowI) => {
           return (
-            <Row>
-              { range().map((column) => <Cell row={row} column={column}/>) }
+            <Row key={rowI}>
+              { range().map((column, colI) => <Cell row={row} column={column} key={colI} />) }
             </Row>
           )
         })

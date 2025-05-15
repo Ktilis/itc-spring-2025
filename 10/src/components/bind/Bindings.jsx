@@ -10,12 +10,15 @@ export const Bindings = () => {
   const { setPause } = positionSlice.actions;
   const dispatch = useDispatch();
 
+  // https://ru.react.dev/reference/react/useEffect
   useEffect(() => {
     const bindHandler = (e) => {
+
     }
 
     document.addEventListener('keydown', bindHandler);
 
+    // Это функция вызываемая при удалении объекта
     return () => document.removeEventListener('keydown', bindHandler);
   }, []);
 
