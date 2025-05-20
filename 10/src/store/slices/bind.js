@@ -17,6 +17,7 @@ export const bindSlice = createSlice({
     setBind: (state, action) => {
       if(state.direction === null) return;
       state.bindings[state.direction] = action.payload;
+      state.direction = null;
     },
     selectDirection: (state, action) => {
       state.direction = action.payload;

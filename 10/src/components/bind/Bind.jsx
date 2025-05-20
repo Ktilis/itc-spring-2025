@@ -15,24 +15,27 @@ export const Bind = ({ direction }) => {
   const waiting = direction === cdirection;
 
   const handleClick = () => {
-    const func = (e) => {
-      document.body.removeEventListener('keydown', func);
-
-      console.log(e.code);
-      console.log(`${cdirection} === ${direction} = ${cdirection===direction}`);
-
-      if(cdirection !== direction) {
-        return;
-      }
-
-      dispatch(setBind(e.code));
-      dispatch(selectDirection(null));
-      //dispatch(setPause(false));
-    }
-
     dispatch(selectDirection(direction));
-    //dispatch(setPause(true));
-    document.body.addEventListener('keydown', func);
+    dispatch(setPause(true));
+
+    // const func = (e) => {
+    //   document.removeEventListener('keydown', func);
+
+    //   console.log(e.code);
+    //   console.log(`${cdirection} === ${direction} = ${cdirection===direction}`);
+
+    //   if(cdirection !== direction) {
+    //     return;
+    //   }
+
+    //   dispatch(setBind(e.code));
+    //   dispatch(selectDirection(null));
+    //   //dispatch(setPause(false));
+    // }
+
+    // dispatch(selectDirection(direction));
+    // //dispatch(setPause(true));
+    // document.addEventListener('keydown', func);
   }
 
   return (

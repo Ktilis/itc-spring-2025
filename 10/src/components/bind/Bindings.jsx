@@ -13,7 +13,9 @@ export const Bindings = () => {
   // https://ru.react.dev/reference/react/useEffect
   useEffect(() => {
     const bindHandler = (e) => {
-
+      const key = e.code;
+      dispatch(setBind(key));
+      dispatch(setPause(false));
     }
 
     document.addEventListener('keydown', bindHandler);

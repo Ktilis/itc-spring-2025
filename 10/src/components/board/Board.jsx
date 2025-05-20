@@ -15,7 +15,20 @@ export const Board = () => {
   const binds = useSelector(getBinds);
   const { up, down, left, right } = binds;
 
-  // TODO: useEffect
+  const keyDownListener = (e) => {
+    console.log("1");
+    for(const key in binds) {
+      const value = binds[key];
+      if(value === e.code) dispatch(moveDir({direction: key.toUpperCase()}));
+    }
+  };
+  useEffect(() => {
+    console.log('useEffect');
+
+    document.addEventListener('keydown', keyDownListener);
+
+    return () => document.removeEventListener('keydown', keyDownListener);
+  }, [binds]);
 
   return (
     <div className={classes.board}>
