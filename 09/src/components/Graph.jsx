@@ -5,9 +5,11 @@ export const Graph = ({ population }) => {
     return null;
   }
 
-  // TODO: ...
   return (
     <BarChart
+
+
+
       height={600}
       dataset={population}
       xAxis={[{
