@@ -9,11 +9,23 @@ const initialState = {
   }
 }
 
+const canMove = (row, column) => {
+  return {
+    up: row > 0,
+    down: row < 8-2,
+    left: column > 0,
+    right: column < 8-2,
+  }
+}
+
 export const boxesSlice = createSlice({
   name: "boxes",
   initialState,
   reducers: {
     moveBox: (state, action) => {
+      const pl = action.payload;
+      state[pl.box].row = pl.row;
+      state[pl.box].column = pl.column;
     }
   },
   selectors: {
@@ -21,8 +33,8 @@ export const boxesSlice = createSlice({
     getOrangeBox: (state) => state.orange,
     canMove: (state) => {
       return {
-        green: {},
-        orange: {},
+        green: canMove(state.green.row, state.green.column),
+        orange: canMove(state.orange.row, state.orange.column),
       }
     }
   }

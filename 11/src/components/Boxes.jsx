@@ -15,8 +15,49 @@ export const Boxes = () => {
   const dispatch = useDispatch();
   const movesAvailable = useSelector(canMove);
 
+  const keysList = [
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowLeft',
+    'ArrowRight'
+  ];
+
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if(!keysList.includes(e.code)) return;
+
+      const currentBoxColor = order;
+      const currentBox = currentBoxColor==='green' ? greenBox : orangeBox;
+
+      let row = currentBox.row;
+      let column = currentBox.column;
+
+      switch(e.code) {
+        case 'ArrowUp': 
+          if(!movesAvailable[currentBoxColor].up) break;
+          row--;
+          break;
+        case 'ArrowDown':
+          if(!movesAvailable[currentBoxColor].down) break;
+          row++;
+          break;
+        case 'ArrowLeft':
+          if(!movesAvailable[currentBoxColor].left) break;
+          column--;
+          break;
+        case 'ArrowRight':
+          if(!movesAvailable[currentBoxColor].right) break;
+          column++;
+          break;
+        default:
+          return;
+      }
+
+      // Если значения не изменились, выходим из функции
+      if(row === currentBox.row && column === currentBox.column) return;
+
+      dispatch(moveBox({box: currentBoxColor, row: row, column: column}));
+      dispatch(next());
     }
 
     document.addEventListener('keydown', handleKeyDown);
