@@ -6,7 +6,7 @@ export const Board = () => {
     const result = [];
     for (let row = 0; row < 4; row++) {
       for (let col = 0; col < 8; col++) {
-        result.push(<Cell column={col} row={row} />);
+        result.push(<Cell column={col} row={row} key={'' + row + ':' + col} />);
       }
     }
     return result;

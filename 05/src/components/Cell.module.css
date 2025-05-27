@@ -12,9 +12,9 @@
 }
 
 .white.current {
-  background: red;
+  background: rgb(192, 0, 0);
 }
 
 .black.current {
-  background: red;
+  background: rgb(192, 0, 0);
 }
