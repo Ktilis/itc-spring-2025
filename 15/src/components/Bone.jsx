@@ -12,7 +12,8 @@ export const Bone = ({ number }) => {
   const handleClick = () => {
     const direction = moves[number];
 
-    // TODO: запросить перемещение, если direction не undefined
+    if(direction)
+      dispatch(moveBone({ bone: number, direction: direction }));
   }
 
   return (

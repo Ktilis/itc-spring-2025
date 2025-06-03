@@ -4,9 +4,10 @@ import { bonesSlice } from '../store/slices/bones'
 
 export const Shuffle = () => {
   const dispatch = useDispatch();
+  const { shuffleBones } = bonesSlice.actions;
 
   const handleClick = () => {
-    // TODO: подключить action и отправить на выполнение
+    dispatch(shuffleBones());
   }
 
   return (

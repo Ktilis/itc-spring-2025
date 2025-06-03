@@ -9,7 +9,7 @@ export const Board = () => {
   const bones = useSelector(getBones);
   return (
     <div className={classes.board}>
-      { bones.map((bone) => bone !== 0 ? <Bone number={bone} /> : <BlankBone />) }
+      { bones.map((bone) => bone !== 0 ? <Bone number={bone} key={bone} /> : <BlankBone key={bone} />) }
     </div>
   )
 }

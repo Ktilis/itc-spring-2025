@@ -1,5 +1,6 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit'
 
+// Не использую, т.к. сделал свой способ для этого, аналогичный этому
 const swap = (array, pos, diff) => {
   const tmp = array[pos];
   array[pos] = array[pos + diff];
@@ -10,8 +11,8 @@ const swap = (array, pos, diff) => {
 
 const shuffleBones = () => {
   const bones = Array(15).fill(0).map((_, i) => i + 1);
-  const result = bones // [];
-  // TODO: перемешать фишки из bones в result
+
+  const result = bones.sort(() => Math.random() - 0.5); // bones;
 
   result.push(0);
 
@@ -30,9 +31,16 @@ const getMoves = createSelector(
   getBones,
   (bones) => {
     const moves = {};
-    bones.forEach((bone, index) => {
-      // TODO: определить, в каком направлении может двигаться фишка
-    });
+    const blankBoneIndex = bones.findIndex(el => el===0);
+
+    if(blankBoneIndex-4 >= 0)
+        moves[bones[blankBoneIndex-4]] = 'down';
+    if(blankBoneIndex-1 >= 0)
+        moves[bones[blankBoneIndex-1]] = 'left';
+    if(blankBoneIndex+4 < bones.length)
+        moves[bones[blankBoneIndex+4]] = 'down';
+    if(blankBoneIndex+1 < bones.length)
+        moves[bones[blankBoneIndex+1]] = 'right';
 
     return moves;
   }
@@ -42,7 +50,12 @@ const getSolved = createSelector(
   getBones,
   (bones) => {
     let solved = true;
-    // TODO: определить, решена ли головоломка
+
+    bones.forEach((bone, i) => {
+      if(bone !== 0 && bone !== i+1) solved = false;
+      console.log(bone, i+1, bone !== i+1);
+    });
+
     return solved;
   }
 );
@@ -54,7 +67,27 @@ export const bonesSlice = createSlice({
     moveBone: (state, action) => {
       const { bone, direction } = action.payload;
 
-      // TODO: переместить фишку в указанном направлении
+      let steps = 0;
+      switch (direction) {
+          case 'up':
+              steps = -4;
+              break;
+          case 'left':
+              steps = -1;
+              break;
+          case 'down':
+              steps = 4;
+              break;
+          case 'right':
+              steps = 1;
+              break;
+      }
+
+      const boneIndex = state.bones.findIndex(el => el === bone);
+      const blankBoneIndex = state.bones.findIndex(el => el === 0);
+
+      state.bones[boneIndex] = 0;
+      state.bones[blankBoneIndex] = bone;
     },
     shuffleBones: (state) => {
       state.bones = shuffleBones();
