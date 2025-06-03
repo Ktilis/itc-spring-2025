@@ -2,7 +2,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px 0px;
+  gap: 8px 0;
+
+  border-radius: 15px;
 
   align-items: center;
   justify-content: flex-end;
@@ -13,6 +15,11 @@
   &:hover {
     background: #d8dee9;
   }
+}
+
+.pole.selected {
+  background: #9a9ea6;
+
 }
 
 .pole::before {
